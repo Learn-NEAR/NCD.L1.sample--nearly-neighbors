@@ -209,7 +209,7 @@ TODO: Add referral to resources for deploying
 There are two main ways you can contribute to this project:
 
 1. **Build off of it**: we made this so that developers like you can build dApps more quickly and easily. Try building out a Web3 app on top of the provided [contracts](#contracts), using the wireframes as your guide.
-2. **Enhance this dApp seed**: if you find a bug or an opportunity to enhance this repository, please submit an [issue](https://github.com/near-examples/cross-contract-calls/issues) and/or open a [pull request](https://github.com/near-examples/cross-contract-calls/pulls).
+2. **Enhance this dApp seed**: if you find a bug or an opportunity to enhance this repository, please submit an [issue](https://github.com/Learn-NEAR/nearly-neighbors/issues) and/or open a [pull request](https://github.com/Learn-NEAR/nearly-neighbors/pulls).
 
 Interested in creating your own **dApp seed** and earning rewards for your efforts? Learn more: [TODO: ADD LINK / MORE COPY].
 
