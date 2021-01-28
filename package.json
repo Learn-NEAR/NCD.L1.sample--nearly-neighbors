@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "watch -d -n 1 'clear && yarn test:unit'",
     "asp": "asp --verbose --nologo",
-    "test:unit": "yarn asp -f src/*unit.spec",
-    "build": "yarn build -d src/factory && yarn build -d src/proposal && yarn build -d src/project",
+    "test:unit": "yarn asp -f unit.spec",
     "build": "asb --target debug",
     "build:release": "asb",
     "test": "yarn test:unit && yarn test:simulate",
