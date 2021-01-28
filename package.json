@@ -1,0 +1,23 @@
+{
+  "name": "nearly-neighbors",
+  "version": "0.0.1",
+  "description": "A family of NEAR contracts to enable crowd-sourced civic development.",
+  "scripts": {
+    "dev": "watch -d -n 1 'clear && yarn test:unit'",
+    "asp": "asp --verbose --nologo",
+    "test:unit": "yarn asp -f src/*unit.spec",
+    "build": "yarn build -d src/factory && yarn build -d src/proposal && yarn build -d src/project",
+    "build": "asb --target debug",
+    "build:release": "asb",
+    "test": "yarn test:unit && yarn test:simulate",
+    "test:simulate": "yarn build:release && cargo test -- --nocapture",
+    "clean": "rm -rf ./build",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/asp"
+  },
+  "keywords": [],
+  "author": "hello@near.org",
+  "license": "ISC",
+  "devDependencies": {
+    "near-sdk-as": "^2.2.0"
+  }
+}
