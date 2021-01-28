@@ -1,0 +1,10 @@
+# [package]
+# name = "nearly-neighbors"
+# version = "0.0.0"
+# authors = ["Near Inc <hello@nearprotocol.com>"]
+# edition = "2018"
+
+[workspace]
+members = [
+  "simulation"
+]
