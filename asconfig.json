@@ -1,0 +1,7 @@
+{
+  "workspaces": [
+    "src/factory",
+    "src/proposal",
+    "src/project"
+  ]
+}
