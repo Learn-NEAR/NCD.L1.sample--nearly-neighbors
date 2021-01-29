@@ -22,6 +22,10 @@ const setCurrentAccount = (): void => {
   VMContext.setCurrent_account_id('alice');
 };
 
+const zeroOutBalance = (): void => {
+  VMContext.setAccount_balance(u128.Zero);
+};
+
 const attachMinBalance = (): void => {
   VMContext.setAttached_deposit(MIN_ACCOUNT_BALANCE);
 };
@@ -35,6 +39,7 @@ const doConfigure = (): void => {
 };
 
 const initAndConfig = (): void => {
+  zeroOutBalance();
   attachMinBalance();
   doInitialize();
   doConfigure();
@@ -110,17 +115,82 @@ describe('20.nearly-neighbors.project', () => {
     it('adds a new expense', () => {
       expect(contract.get_expenses().length).toBe(0);
 
-      const label = 'roaster'
-      const amount = toYocto(4)
+      const label = 'roaster';
+      const amount = toYocto(4);
 
-      contract.add_expense(label, amount)
+      contract.add_expense(label, amount);
 
       expect(contract.get_expenses().length).toBe(1);
 
       const expense = contract.get_expenses()[0];
       expect(expense).not.toBeNull();
-      expect(expense!.label).toBe(label);
-      expect(expense!.amount).toBe(amount);
+      expect(expense.label).toBe(label);
+      expect(expense.amount).toBe(amount);
+    });
+  });
+
+  describe('get_project(): Project', () => {
+    beforeEach(initAndConfig);
+
+    it('returns the project object with details and funding', () => {
+      const project = contract.get_project();
+
+      expect(project.details).not.toBeNull();
+      expect(project.funding).not.toBeNull();
+    });
+  });
+
+  describe('get_factory(): AccountId', () => {
+    beforeEach(initAndConfig);
+
+    it('returns the factory account ID', () => {
+      expect(contract.get_factory()).toBe(FACTORY_ACCOUNT_ID);
+    });
+  });
+
+  describe('get_proposal(): AccountId', () => {
+    beforeEach(initAndConfig);
+
+    it('returns the proposal account ID', () => {
+      expect(contract.get_proposal()).toBe(PROPOSAL_ACCOUNT_ID);
+    });
+  });
+
+  describe('get_remaining_budget(): u128', () => {
+    beforeEach(initAndConfig);
+
+    it('returns zero when funding total is equal to MIN_ACCOUNT_BALANCE', () => {
+      expect(contract.get_remaining_budget()).toBe(u128.Zero);
+    });
+  });
+
+  describe('get_expenses(): [Expense]', () => {
+    beforeEach(initAndConfig);
+
+    it('returns the list of expenses', () => {
+      contract.add_expense('x', toYocto(4));
+
+      expect(contract.get_expenses().length).toBe(1);
+
+      const expense = contract.get_expenses()[0];
+      expect(expense).not.toBeNull();
+      expect(expense.label).toBe('x');
+      expect(expense.amount).toBe(toYocto(4));
+    });
+  });
+
+  describe('get_contributors(): {[AccountId]: Contribution}', () => {
+    beforeEach(initAndConfig);
+
+    it('returns the map of contributors', () => {
+      const contribution = new contract.Contribution('a', 'x', toYocto(2));
+      contract.add_contributor('a', contribution);
+
+      const contributor = contract.get_contributors().get('a', null);
+      expect(contributor).not.toBeNull();
+      expect(contributor!.account).toBe('a');
+      expect(contributor!.task).toBe('x');
+      expect(contributor!.amount).toBe(toYocto(2));
     });
   });
 });
