@@ -45,7 +45,7 @@ const initAndConfig = (): void => {
   doConfigure();
 };
 
-describe('20.nearly-neighbors.project', () => {
+describe('project', () => {
   beforeEach(setCurrentAccount);
   beforeEach(useFactoryAsPredecessor);
 
