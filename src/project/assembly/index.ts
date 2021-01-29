@@ -172,6 +172,21 @@ export function configure(title: string, description: string): void {
 }
 
 /**
+ * @function add_funds
+ *
+ * Updates funding total with attached deposit.
+ */
+export function add_funds(): void {
+  assert_configured();
+
+  const funds = context.attachedDeposit;
+  const project = storage.get<Project>(PROJECT_KEY)!;
+  project.funding!.total = u128.add(project.funding!.total, funds);
+
+  resave_project(project);
+}
+
+/**
  * @function add_contributor
  * @param account {AccountId}         - contributor account
  * @param contribution {Contribution} - contribution object
@@ -215,6 +230,7 @@ export function add_expense(
   const project = storage.get<Project>(PROJECT_KEY)!;
   const expense = new Expense(label, amount);
   project.funding!.expenses.push(expense);
+  project.funding!.spent = u128.add(project.funding!.spent, amount);
 
   resave_project(project);
 }

@@ -83,6 +83,19 @@ describe('project', () => {
     });
   });
 
+  describe('add_funds(): void', () => {
+    beforeEach(initAndConfig);
+
+    it('adds attached deposit to the account and updates funding total', () => {
+      expect(contract.get_remaining_budget()).toBe(u128.Zero);
+
+      VMContext.setAttached_deposit(toYocto(7));
+      contract.add_funds();
+
+      expect(contract.get_remaining_budget()).toBe(toYocto(7));
+    });
+  });
+
   describe('add_contributor(account: AccountId, contribution: Contribution): void', () => {
     beforeEach(initAndConfig);
 
@@ -127,6 +140,14 @@ describe('project', () => {
       expect(expense.label).toBe(label);
       expect(expense.amount).toBe(amount);
     });
+
+    it('updates the remaining budget by counting towards the spent funding', () => {
+      VMContext.setAttached_deposit(toYocto(10));
+      contract.add_funds();
+      expect(contract.get_remaining_budget()).toBe(toYocto(10));
+      contract.add_expense('x', toYocto(4));
+      expect(contract.get_remaining_budget()).toBe(toYocto(6));
+    });
   });
 
   describe('get_project(): Project', () => {
@@ -161,6 +182,14 @@ describe('project', () => {
 
     it('returns zero when funding total is equal to MIN_ACCOUNT_BALANCE', () => {
       expect(contract.get_remaining_budget()).toBe(u128.Zero);
+    });
+
+    it('returns the difference of the total funding and amount spent', () => {
+      VMContext.setAttached_deposit(toYocto(10))
+      contract.add_funds();
+      expect(contract.get_remaining_budget()).toBe(toYocto(10));
+      contract.add_expense('x', toYocto(4));
+      expect(contract.get_remaining_budget()).toBe(toYocto(6));
     });
   });
 
