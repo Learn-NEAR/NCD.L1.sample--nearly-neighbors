@@ -111,6 +111,9 @@ class ProjectDetails {
  * @property task     - task description and details assigned to this contributor
  * @property amount   - budget for this contribution
  * @property status   - status of the contribution
+ *
+ * TODO: answer: how do contributions affect the overall project budget? Do their amounts
+ *  get counted towards the 'spent' when status = COMPLETED?
  */
 @nearBindgen
 export class Contribution {
