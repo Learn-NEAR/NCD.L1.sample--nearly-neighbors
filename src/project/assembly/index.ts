@@ -180,7 +180,7 @@ export function add_funds(): void {
   assert_configured();
 
   const funds = context.attachedDeposit;
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   project.funding!.total = u128.add(project.funding!.total, funds);
 
   resave_project(project);
@@ -202,7 +202,7 @@ export function add_contributor(
 ): void {
   assert_configured();
 
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   const contributors = project.contributors;
   contributors.set(account, contribution);
   project.contributors = contributors;
@@ -227,7 +227,7 @@ export function add_expense(
 ): void {
   assert_configured();
 
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   const expense = new Expense(label, amount);
   project.funding!.expenses.push(expense);
   project.funding!.spent = u128.add(project.funding!.spent, amount);
@@ -289,7 +289,7 @@ export function get_proposal(): AccountId {
 export function get_remaining_budget(): u128 {
   assert_configured();
 
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   return u128.sub(project.funding!.total, project.funding!.spent);
 }
 
@@ -302,7 +302,7 @@ export function get_remaining_budget(): u128 {
 export function get_expenses(): PersistentVector<Expense> {
   assert_configured();
 
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   return project.funding!.expenses;
 }
 
@@ -315,7 +315,7 @@ export function get_expenses(): PersistentVector<Expense> {
 export function get_contributors(): PersistentMap<AccountId, Contribution> {
   assert_configured();
 
-  const project = storage.get<Project>(PROJECT_KEY)!;
+  const project = get_project();
   return project.contributors;
 }
 
