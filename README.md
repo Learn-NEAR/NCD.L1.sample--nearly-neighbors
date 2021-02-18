@@ -1,14 +1,29 @@
 # Nearly Neighbors
 
-A family of NEAR contracts to enable crowd-sourced civic development. Think Kickstarter for neighborhood projects.
+A family of smart contracts developed for NEAR Protocol to enable crowd-sourced civic development. Think Kickstarter for neighborhood projects.
+
+## Concept
+
+The contracts provided here enable users to propose neighborhood development projects and crowd-source funding for them.
+
+Think of it like Kickstarter, but instead of funding your roommate's sister's math rock band, you'd propose and fund projects like a new local park, grocery store, or community center. And the whole thing is powered by the NEAR protocol, so identity and financial tools are built in.
+
+### Example Story
+
+For the sake of this explanation, we'll assume three users: Alice, Bob, and Carol.
+
+1. Alice notices that there isn't a good grocery store in her neighborhood, so she creates a new [proposal](#proposal) and sets a target funding goal of 10 NEAR tokens.
+2. Bob lives nearby and also would like to have fresh produce, so he pledges 5 NEAR tokens to Alice's proposal with a geographic radius of 1km from his home.
+3. Carol lives farther away, but she would still like to have a grocery store even if it is a longer walk, so she pledges another 5 NEAR to Alice's proposal with an allowed radius of 5km.
+4. Now that the proposal is _fully funded_, it is transformed into a [project](#project). A new project account is created, and Bob and Carol's pledged NEAR tokens are transferred over. This project's geographic location is set to the area of overlap between Bob and Carol's specified radii.
+5. Alice, as the project owner, now has access to the project funds to hire a contractor and build her grocery store!
+
 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Commands](#commands)
   - [Who This Is For](#who-this-is-for)
-- [Project Concept](#project-concept)
-  - [Example Story](#example-story)
-  - [UI Wireframes](#ui-wireframes)
+- [UI Wireframes](#ui-wireframes)
 - [File Structure](#file-structure)
 - [Contracts](#contracts)
   - [Proposal](#proposal)
@@ -75,23 +90,7 @@ yarn test                     # yarn test:unit && test:simulate
 - Developers new to the NEAR Protocol looking for a learning sandbox
 - NEAR developers looking for inspiration
 
-## Project Concept
-
-The contracts provided here enable users to propose neighborhood development projects and crowd-source funding for them.
-
-Think of it like Kickstarter, but instead of funding your roommate's sister's math rock band, you'd propose and fund projects like a new local park, grocery store, or community center. And the whole thing is powered by the NEAR protocol, so identity and financial tools are built in.
-
-### Example Story
-
-For the sake of this explanation, we'll assume three users: Alice, Bob, and Carol.
-
-1. Alice notices that there isn't a good grocery store in her neighborhood, so she creates a new [proposal](#proposal) and sets a target funding goal of 10 NEAR tokens.
-2. Bob lives nearby and also would like to have fresh produce, so he pledges 5 NEAR tokens to Alice's proposal with a geographic radius of 1km from his home.
-3. Carol lives farther away, but she would still like to have a grocery store even if it is a longer walk, so she pledges another 5 NEAR to Alice's proposal with an allowed radius of 5km.
-4. Now that the proposal is _fully funded_, it is transformed into a [project](#project). A new project account is created, and Bob and Carol's pledged NEAR tokens are transferred over. This project's geographic location is set to the area of overlap between Bob and Carol's specified radii.
-5. Alice, as the project owner, now has access to the project funds to hire a contractor and build her grocery store!
-
-### UI Wireframes
+## UI Wireframes
 
 More wireframes can be found in the `wireframes/` folder. Here are some examples showing how we envision the basic user interface elements.
 
