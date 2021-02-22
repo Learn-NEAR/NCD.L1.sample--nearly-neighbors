@@ -48,8 +48,9 @@ This repository is an example of a **dApp seed** project. **dApp seed** projects
 
 1. clone this repo
 2. run `yarn install` (or `npm install`)
-3. run `yarn test` (or `npm run test`)
-4. explore the contents of `src/`
+3. run `yarn build` (or `npm run build`)
+4. run `yarn test` (or `npm run test`)
+5. explore the contents of `src/`
 
 See below for more convenience scripts ...
 
