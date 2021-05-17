@@ -2,6 +2,10 @@
 
 A family of smart contracts developed for NEAR Protocol to enable crowd-sourced civic development. Think Kickstarter for neighborhood projects.
 
+## ⚠️ Warning
+
+Any content produced by NEAR, or developer resources that NEAR provides, are for educational and inspiration purposes only.  NEAR does not encourage, induce or sanction the deployment of any such applications in violation of applicable laws or regulations.
+
 ## Concept
 
 The contracts provided here enable users to propose neighborhood development projects and crowd-source funding for them.
